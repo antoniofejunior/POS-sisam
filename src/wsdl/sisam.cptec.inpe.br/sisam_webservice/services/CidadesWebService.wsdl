@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://sisam.cptec.inpe.br/sisam_webservice/services/CidadesWebService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://sisam.cptec.inpe.br/sisam_webservice/services/CidadesWebService" xmlns:intf="http://sisam.cptec.inpe.br/sisam_webservice/services/CidadesWebService" xmlns:tns1="http://webservice.sisam.dsa.inpe.br" xmlns:tns2="urn:br.inpe.dsa.sisam.modelo" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://webservice.sisam.dsa.inpe.br" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="urn:br.inpe.dsa.sisam.modelo"/>
+   <element name="getMunicipios">
+    <complexType>
+     <sequence>
+      <element name="cidade" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getMunicipiosResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getMunicipiosReturn" type="tns2:Pontos_municipais"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getEstados">
+    <complexType/>
+   </element>
+   <element name="getEstadosResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getEstadosReturn" type="tns2:Estados"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="urn:br.inpe.dsa.sisam.modelo" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Pontos_municipais">
+    <sequence>
+     <element name="geocodigo" nillable="true" type="xsd:string"/>
+     <element name="gid" nillable="true" type="xsd:long"/>
+     <element name="id_previsao" nillable="true" type="xsd:int"/>
+     <element name="id_uf" nillable="true" type="xsd:string"/>
+     <element name="latitude" nillable="true" type="xsd:double"/>
+     <element name="longitude" nillable="true" type="xsd:double"/>
+     <element name="mesoregiao" nillable="true" type="xsd:string"/>
+     <element name="microregia" nillable="true" type="xsd:string"/>
+     <element name="nome" nillable="true" type="xsd:string"/>
+     <element name="regiao" nillable="true" type="xsd:string"/>
+     <element name="sede" nillable="true" type="xsd:string"/>
+     <element name="uf" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Estados">
+    <sequence>
+     <element name="capital" nillable="true" type="xsd:string"/>
+     <element name="estado" nillable="true" type="xsd:string"/>
+     <element name="id_estado" nillable="true" type="xsd:long"/>
+     <element name="sigla" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getMunicipiosRequest">
+
+      <wsdl:part element="tns1:getMunicipios" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEstadosResponse">
+
+      <wsdl:part element="tns1:getEstadosResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEstadosRequest">
+
+      <wsdl:part element="tns1:getEstados" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMunicipiosResponse">
+
+      <wsdl:part element="tns1:getMunicipiosResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="CidadesService">
+
+      <wsdl:operation name="getMunicipios">
+
+         <wsdl:input message="impl:getMunicipiosRequest" name="getMunicipiosRequest"/>
+
+         <wsdl:output message="impl:getMunicipiosResponse" name="getMunicipiosResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEstados">
+
+         <wsdl:input message="impl:getEstadosRequest" name="getEstadosRequest"/>
+
+         <wsdl:output message="impl:getEstadosResponse" name="getEstadosResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="CidadesWebServiceSoapBinding" type="impl:CidadesService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getMunicipios">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getMunicipiosRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getMunicipiosResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEstados">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getEstadosRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getEstadosResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="CidadesServiceService">
+
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Lista os Estados brasileiros ou um lista de municipios apos uma pesquisa  </wsdl:documentation>
+
+      <wsdl:port binding="impl:CidadesWebServiceSoapBinding" name="CidadesWebService">
+
+         <wsdlsoap:address location="http://sisam.cptec.inpe.br/sisam_webservice/services/CidadesWebService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
